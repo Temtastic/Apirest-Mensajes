@@ -17,3 +17,7 @@ def crear_mensaje(mensaje: Mensaje):
     mensaje.id = len(mensajes_db) + 1
     mensajes_db.append(mensaje)
     return mensaje
+
+@app.get("/mensajes/", response_model=List[Mensaje])
+def listar_mensajes():
+    return mensajes_db
