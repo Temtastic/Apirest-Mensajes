@@ -21,3 +21,10 @@ def crear_mensaje(mensaje: Mensaje):
 @app.get("/mensajes/", response_model=List[Mensaje])
 def listar_mensajes():
     return mensajes_db
+
+@app.get("/mensajes/{mensaje_id}", response_model=Mensaje)
+def obtener_mensaje(mensaje_id: int):
+    for mensaje in mensajes_db:
+        if mensaje.id == mensaje_id:
+            return mensaje
+    raise HTTPException(status_code=404, detail="Mensaje no encontrado")
